@@ -108,7 +108,7 @@
 ```
 ####用户上传图片及文字
 - c: 用户上传图片及相应文字
-- c->s: 上传图片请求：: `picture_upload_request`
+- c->s: 上传图片请求: `picture_upload_request`
 ```
 {
 	"type":"picture_upload_request",
@@ -130,7 +130,7 @@
 ```
 ####点赞
 - c: 用户对图片点赞
-- c->s: 点赞图片请求：: `picture_like_request`
+- c->s: 点赞图片请求: `picture_like_request`
 ```
 {
 	"type":"picture_like_request",
@@ -150,3 +150,7 @@
 ###个人资料
 
 ###设置
+####号码更换
+- c: 用户号码更换
+- c->s: 用户号码更换请求: `picture_like_request`
+####接收暗恋信息
