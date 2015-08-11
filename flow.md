@@ -4,13 +4,48 @@
 
 ###短信验证
 
-- c->s: 短信验证请求 ：`sms_validation_request`
+- c->s: 
+- 请求方式 POST
+- URL：http://101.200.89.240/index.php?r=User/smsValidationCode
+```
+{
+	"type":"sms_validation_result",
+	"code":"18782945332",
+	"tel":"18782945332"
+}
+```
+
+- s->c: 
+- 若请求成功，返回
 
 ```
 {
-	"type":"sms_validation_request"
-	"tel":"18615794931",
-	"time":"2015-8-4 1:44"
+	"type":"picture_search_response",
+	"success":true,
+	"error_no":0,
+	"error_msg":null,
+	"count":1,
+	"offset":0,
+	"limit":1,
+	"pictures":{
+		"55c99c2cf3bac6e813000033":{
+			"_id":{"$id":"55c99c2cf3bac6e813000033"},
+			"picture":"uploads\/18782945332\/14392760763437633d.jpeg",
+			"word":"hello!",
+			"createtime":"1439276076",
+			"created_by":{"$id":"55c99c1613c5ea8feac65302"}
+		}
+	}
+}
+```
+- 若请求失败，返回
+```
+{
+	"type":"picture_search_response",
+	"success":false,
+	"error_no":1,
+	"error_msg":
+	"json decode failed."
 }
 ```
 
@@ -62,47 +97,48 @@
 
 ###秀爱社区
 ####查看信息
-- c->s: 信息请求 ：`picture_info_request`
-
+- c->s: 
+- 请求方式 POST
+- URL：http://101.200.89.240/index.php?r=picture/search
 ```
 {
-	"type":"picture_info_request"
-	"token":"user1",
+	"type":"picture_search_request",
+	"tel":"18782945332",
+	"token":"18782945332"
 }
 ```
 
-
-- s: 按照时间查询，发送最近20条社区消息给客户端
-- s->c: 周边信息响应：`picture_info_response`
+- s->c: 
+- 若请求成功，返回
 
 ```
 {
-	"type":"picture_info_response",
-	"information":[{
-		"picture_id":"200",
-		"picture_publish_time":"2015-8-4 1:44",
-		"picture_content":"",
-		"picture_words":"it's a picture",
-		"picture_like_num":"7",
-		"picture_owner":"zhang",
-		"picture_comment":[{
-			"comment_own":"wang",
-			"comment_msg":"hello",
-			"comment_response":[{
-				"comment_response_own":"zhang"
-				"comment_response_msg":"hi"
-			},
-			...
-			]
-		},
-		...
-		],
-	},
-	...
-	]
+	"type":"picture_search_response",
 	"success":true,
 	"error_no":0,
-	"err_msg":""
+	"error_msg":null,
+	"count":1,
+	"offset":0,
+	"limit":1,
+	"pictures":{
+		"55c99c2cf3bac6e813000033":{
+			"_id":{"$id":"55c99c2cf3bac6e813000033"},
+			"picture":"uploads\/18782945332\/14392760763437633d.jpeg",
+			"word":"hello!",
+			"createtime":"1439276076",
+			"created_by":{"$id":"55c99c1613c5ea8feac65302"}
+		}
+	}
+}
+```
+- 若请求失败，返回
+```
+{
+	"type":"picture_search_response",
+	"success":false,
+	"error_no":1,
+	"error_msg":
+	"json decode failed."
 }
 ```
 ####用户上传图片及文字
@@ -112,22 +148,34 @@
 ```
 {
 	"type":"picture_upload_request",
-	"token":"18782946332",
-	"tel":"18782946332",
+	"token":"18782945332",
+	"tel":"18782945332",
 	"words":"hello!",
 	"picture":"data:image\/jpeg;base64..."
 
 }
 ```
 
-- s: 处理并保存用户上传图片及文字
-- s->c： 用户上传的图片及文字的处理结果，`picture_upload_response`,若成功则返回“true”,否则返回“false”
-
+- s->c： 
+- 若请求成功，则返回
 
 ```
 {
 	"type":"picture_upload_response",
+	"success":true,
+	"error_no":0,
+	"error_msg":null,
+	"picture":"14392797035a676b3d.jpeg"
+}
+```
+- 若请求失败，返回
+```
+{
+	"type":"picture_search_response",
 	"success":false,
+	"error_no":1,
+	"error_msg":
+	"json decode failed."
 }
 ```
 ####点赞
