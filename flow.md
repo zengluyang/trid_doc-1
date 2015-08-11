@@ -60,25 +60,24 @@
 
 ###暗恋
 
-###Around
-####查看周边信息
-- c->s: 周边信息请求 ：`Around_information_request`
+###秀爱社区
+####查看信息
+- c->s: 信息请求 ：`picture_info_request`
 
 ```
 {
-	"type":"Around_information_request"
-	"tel":"18615794931",
-	"time":"2015-8-4 1:44"
+	"type":"picture_info_request"
+	"token":"user1",
 }
 ```
 
 
 - s: 按照时间查询，发送最近20条社区消息给客户端
-- s->c: 周边信息响应：`Around_information_response`
+- s->c: 周边信息响应：`picture_info_response`
 
 ```
 {
-	"type":"Around_information_response",
+	"type":"picture_info_response",
 	"information":[{
 		"picture_id":"200",
 		"picture_publish_time":"2015-8-4 1:44",
@@ -107,14 +106,17 @@
 }
 ```
 ####用户上传图片及文字
-- c: 用户上传图片及相应文字
-- c->s: 上传图片请求: `picture_upload_request`
+- c->s: 
+- 请求方式 POST
+- URL：http://101.200.89.240/index.php?r=picture/upload
 ```
 {
 	"type":"picture_upload_request",
-	"picture_owner":"123456"
-	"picture_content":"",
-	"picture_words":"it's a picture",
+	"token":"18782946332",
+	"tel":"18782946332",
+	"words":"hello!",
+	"picture":"data:image\/jpeg;base64..."
+
 }
 ```
 
