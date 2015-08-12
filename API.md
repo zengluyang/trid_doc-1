@@ -456,44 +456,43 @@
 	    - 无
 - s->c:
     - 成功返回：
-    		```
-    		{
-    			"type":"pf_question_response",
-    			"success":true,
-    			"error_no":0,
-    			"error_msg":"",
-    			"question":{
-    				"pf_id":0,
-    				"pic0_enc":"pic0 base64 encoding",
-    				"pic1_enc":"pic1 base64 encoding"
-    			}
-		}
-		
-		```
+    	```
+    	{
+    		"type":"pf_question_response",
+    		"success":true,
+    		"error_no":0,
+    		"error_msg":"",
+    		"question":{
+    			"pf_id":0,
+    			"pic0_enc":"pic0 base64 encoding",
+    			"pic1_enc":"pic1 base64 encoding"
+    		}
+	    }
+      		
+	   	```
    - 失败返回
-
-		```
-            	{
-                	"type:" "pf_question_response",
-                	"success": false,
-                	"error_no": 1,
-                	"error_msg": "json decode failed."
-                	"question":null
-            	}
+		 ```
+        {
+            "type:" "pf_question_response",
+            "success": false,
+            "error_no": 1,
+            "error_msg": "json decode failed."
+            "question":null
+        }
             	
-            	```
+        ```
 
 
-- 错误码:
+    - 错误码:
     
         |error_no|error_msg|description|
         |--------|---------|-----------|
         |1|json decode failed.|输入不是有效的json对象|
         |2|input not valid.|请求不完整，缺少某些属性|
-	|3|tel not found.|电话号码错误|
-	|4|token not valid.|token不正确，可能是过期或者错误了，需要通过登录流程重新获取新的token|
-	|5|no available pf questions.|数据库中已经不存在用户还未回答过的偏好问题|
-	|6|database error.|数据库错误|
+	    |3|tel not found.|电话号码错误|
+	    |4|token not valid.|token不正确，可能是过期或者错误了，需要通过登录流程重新获取新的token|
+	    |5|no available pf questions.|数据库中已经不存在用户还未回答过的偏好问题|
+	    |6|database error.|数据库错误|
         |7|error in reading pictures.|无法读取偏好问题所对应的图片，或者读取出错|
         |8|base64 encryption error.|base64加密图片出错|
      
