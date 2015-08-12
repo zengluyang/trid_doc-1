@@ -465,13 +465,14 @@
     		"question":{
     			"pf_id":0,
     			"pic0_enc":"pic0 base64 encoding",
-    			"pic1_enc":"pic1 base64 encoding"
+    			"pic1_enc":"pic1 base64 encoding",
+                "description":"what is your favourate, tea or coffee?"
     		}
 	    }
       		
 	   	```
-   - 失败返回
-		 ```
+    - 失败返回
+		```
         {
             "type:" "pf_question_response",
             "success": false,
@@ -495,6 +496,58 @@
 	    |6|database error.|数据库错误|
         |7|error in reading pictures.|无法读取偏好问题所对应的图片，或者读取出错|
         |8|base64 encryption error.|base64加密图片出错|
+
+##提交偏好问题
+- c->s: 
+    - 请求方式 POST
+    - URL：http://101.200.89.240/index.php?r=preference/collect 
+        ```
+        {
+            "type":"pf_answer_send",
+            "tel":"18615794931",
+            "token":"2775495bf4006a925e1540268e083944",
+            "answer":{
+                "pf_id":0,     //对应的偏好问题编号
+                "choice"0      //0或者1
+            }
+        }
+    
+        ```
+    - 注意事项
+        - 无
+- s->c:
+    - 成功返回：
+        ```
+        {
+            "type":"pf_answer_confirm",
+            "success":true,
+            "error_no":0,
+            "error_msg":""
+        }
+            
+        ```
+    - 失败返回
+        ```
+        {
+            "type:" "pf_answer_confirm",
+            "success": false,
+            "error_no": 1,
+            "error_msg": "json decode failed."
+        }
+                
+        ```
+
+
+    - 错误码:
+    
+        |error_no|error_msg|description|
+        |--------|---------|-----------|
+        |1|json decode failed.|输入不是有效的json对象|
+        |2|input not valid.|请求不完整，缺少某些属性|
+        |3|tel not found.|电话号码错误|
+        |4|token not valid.|token不正确，可能是过期或者错误了，需要通过登录流程重新获取新的token|
+        |5|answer not valid|提交的回答无效，可能pf_id或choice设置正确|
+        |6|database error.|数据库错误|
      
 
 	
