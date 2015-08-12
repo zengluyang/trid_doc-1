@@ -328,6 +328,57 @@
 	        |5|tel not verified.|电话号码未通过短信验证|
 	        |6|database error.|数据库错误|
 
+##撤销已发送图片信息
+
+- c->s: 
+	- 请求方式 POST
+	- URL：http://101.200.89.240/index.php?r=picture/delete 
+		```
+		{
+			"type":"picture_delete_request",
+			"token":"2775495bf4006a925e1540268e083944",
+			"tel":"18615794931",
+			"picture_id":"55caecb43b505f7b698b4567"
+		}
+	
+		```
+- s->c： 
+	- 若请求成功，则返回
+
+		```
+		{
+		  	"type" : "picture_delete_response",
+            		"success" : true,
+            		"error_no" : 0,
+            		"error_msg" : null,
+		}
+		```
+		
+	- 若请求失败，返回
+	
+		```
+		{
+			"type":"picture_like_response",
+			"success":false,
+			"error_no":1,
+			"error_msg":
+			"json decode failed."
+		}
+		```
+		
+	- 错误码:
+    
+	    
+	        |error_no|error_msg|description|
+	        |--------|---------|-----------|
+	        |1|json decode failed.|输入不是有效的json对象|
+	        |2|input not valid.|请求不完整，缺少某些属性|
+	        |3|tel not found.|电话号码错误|
+	        |4|token not valid.|token不正确，可能是过期或者错误了，需要通过登录流程重新获取新的token|
+	        |5|query result is null.|数据库返回NULL|
+	        |6|database error.|数据库错误|
+		|7|permission denied.|没有操作权限|
+
 ##点赞
 
 - c->s: 
