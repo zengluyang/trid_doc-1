@@ -213,113 +213,178 @@
         |7|database error.|数据库错误|
 
 
-#主界面
-
-##暗恋
-
-#picture api
-#秀爱社区
-##查看信息
+#picture api(秀爱社区)
+##查看社区信息
 - c->s: 
 	- 请求方式 POST
 	- URL：http://101.200.89.240/index.php?r=picture/search
-	```
-	{
-		"type":"picture_search_request",
-		"tel":"18782945332",
-		"token":"18782945332"
-	}
-	```
+		```
+		{
+			"type":"picture_search_request",
+			"tel":"18782945332",
+			"token":"18782945332"
+		}
+		```
 
 - s->c: 
 	- 若请求成功，返回
 
-	```
-	{
-		"type":"picture_search_response",
-		"success":true,
-		"error_no":0,
-		"error_msg":null,
-		"count":1,
-		"offset":0,
-		"limit":1,
-		"pictures":{
-			"55c99c2cf3bac6e813000033":{
-				"_id":{"$id":"55c99c2cf3bac6e813000033"},
-				"picture":"uploads\/18782945332\/14392760763437633d.jpeg",
-				"word":"hello!",
-				"createtime":"1439276076",
-				"created_by":{"$id":"55c99c1613c5ea8feac65302"}
+		```
+		{
+			"type":"picture_search_response",
+			"success":true,
+			"error_no":0,
+			"error_msg":null,
+			"count":1,
+			"offset":0,
+			"limit":1,
+			"pictures":{
+				"55c99c2cf3bac6e813000033":{
+					"_id":{"$id":"55c99c2cf3bac6e813000033"},
+					"picture":"uploads\/18782945332\/14392760763437633d.jpeg",
+					"word":"hello!",
+					"createtime":"1439276076",
+					"created_by":{"$id":"55c99c1613c5ea8feac65302"}
+				}
 			}
 		}
-	}
-	```
+		```
 	- 若请求失败，返回
-	```
-	{
-		"type":"picture_search_response",
-		"success":false,
-		"error_no":1,
-		"error_msg":
-		"json decode failed."
-	}
-	```
+		```
+		{
+			"type":"picture_search_response",
+			"success":false,
+			"error_no":1,
+			"error_msg":
+			"json decode failed."
+		}
+		```
+	- 错误码:
+    
+	    
+	        |error_no|error_msg|description|
+	        |--------|---------|-----------|
+	        |1|json decode failed.|输入不是有效的json对象|
+	        |2|input not valid.|请求不完整，缺少某些属性|
+	        |3|tel not found.|电话号码错误|
+	        |4|token not valid.|token不正确，可能是过期或者错误了，需要通过登录流程重新获取新的token|
+	        |5|tel not verified.|电话号码未通过短信验证|
+	        |6|database error.|数据库错误|
+	
+
+
 ##用户上传图片及文字
 - c->s: 
 	- 请求方式 POST
 	- URL：http://101.200.89.240/index.php?r=picture/upload
-```
-{
-	"type":"picture_upload_request",
-	"token":"18782945332",
-	"tel":"18782945332",
-	"words":"hello!",
-	"picture":"data:image\/jpeg;base64..."
-
-}
-```
+		```
+		{
+			"type":"picture_upload_request",
+			"token":"18782945332",
+			"tel":"18782945332",
+			"words":"hello!",
+			"picture":"data:image\/jpeg;base64..."
+		
+		}
+		```
 
 - s->c： 
 	- 若请求成功，则返回
 
-```
-{
-	"type":"picture_upload_response",
-	"success":true,
-	"error_no":0,
-	"error_msg":null,
-	"picture":"14392797035a676b3d.jpeg"
-}
-```
+		```
+		{
+			"type":"picture_upload_response",
+			"success":true,
+			"error_no":0,
+			"error_msg":null,
+			"picture":"14392797035a676b3d.jpeg"
+		}
+		```
 	- 若请求失败，返回
-```
-{
-	"type":"picture_search_response",
-	"success":false,
-	"error_no":1,
-	"error_msg":
-	"json decode failed."
-}
-```
+		```
+		{
+			"type":"picture_search_response",
+			"success":false,
+			"error_no":1,
+			"error_msg":
+			"json decode failed."
+		}
+		```
+	- 错误码:
+    
+	    
+	        |error_no|error_msg|description|
+	        |--------|---------|-----------|
+	        |1|json decode failed.|输入不是有效的json对象|
+	        |2|input not valid.|请求不完整，缺少某些属性|
+	        |3|tel not found.|电话号码错误|
+	        |4|token not valid.|token不正确，可能是过期或者错误了，需要通过登录流程重新获取新的token|
+	        |5|tel not verified.|电话号码未通过短信验证|
+	        |6|database error.|数据库错误|
+
 ##点赞
-- c: 用户对图片点赞
-- c->s: 点赞图片请求: `picture_like_request`
-```
-{
-	"type":"picture_like_request",
-	"picture_id":"12"
-}
-```
-- s: 处理用户点赞的动作
-- s->c： 返回点赞行为的处理结果，`picture_like_response`,若成功则返回“true”,否则返回“false”
+
+- c->s: 
+	- 请求方式 POST
+	- URL：http://101.200.89.240/index.php?r=picture/like 
+		```
+		{
+			"type":"picture_like_request",
+			"token":"2775495bf4006a925e1540268e083944",
+			"tel":"18615794931",
+			"picture_id":"55caecb43b505f7b698b4567"
+		}
+	
+		```
+- s->c： 
+	- 若请求成功，则返回
+
+		```
+		{
+		  "type": "picture_like_response",
+		  "success": true,
+		  "error_no": 0,
+		  "error_msg": null,
+		  "picture": {
+		    "_id": {
+		      "$id": "55caecb43b505f7b698b4567"
+		    },
+		    "picture": "uploads/18615794931/1439362228354a673d.jpeg",
+		    "word": "hello!",
+		    "like": 1,
+		    "like_by": [
+		      "18615794931"
+		    ],
+		    "createtime": 1439362228,
+		    "created_by": {
+		      "$id": "55c4c339211c85467bdcef51"
+		    }
+		  }
+		}
+		```
+	- 若请求失败，返回
+		```
+		{
+			"type":"picture_like_response",
+			"success":false,
+			"error_no":1,
+			"error_msg":
+			"json decode failed."
+		}
+		```
+	- 错误码:
+    
+	    
+	        |error_no|error_msg|description|
+	        |--------|---------|-----------|
+	        |1|json decode failed.|输入不是有效的json对象|
+	        |2|input not valid.|请求不完整，缺少某些属性|
+	        |3|tel not found.|电话号码错误|
+	        |4|token not valid.|token不正确，可能是过期或者错误了，需要通过登录流程重新获取新的token|
+	        |5|tel not verified.|电话号码未通过短信验证|
+	        |6|database error.|数据库错误|
 
 
-```
-{
-	"type":"picture_like_response",
-	"success":true,
-}
-```
 ###个人资料
 
 ###设置
