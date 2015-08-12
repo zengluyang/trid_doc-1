@@ -218,6 +218,7 @@
 - c->s: 
 	- 请求方式 POST
 	- URL：http://101.200.89.240/index.php?r=picture/search
+	
 		```
 		{
 			"type":"picture_search_request",
@@ -250,6 +251,7 @@
 		}
 		```
 	- 若请求失败，返回
+	
 		```
 		{
 			"type":"picture_search_response",
@@ -277,6 +279,7 @@
 - c->s: 
 	- 请求方式 POST
 	- URL：http://101.200.89.240/index.php?r=picture/upload
+	
 		```
 		{
 			"type":"picture_upload_request",
@@ -300,7 +303,9 @@
 			"picture":"14392797035a676b3d.jpeg"
 		}
 		```
+		
 	- 若请求失败，返回
+	
 		```
 		{
 			"type":"picture_search_response",
@@ -310,6 +315,7 @@
 			"json decode failed."
 		}
 		```
+		
 	- 错误码:
     
 	    
@@ -362,7 +368,9 @@
 		  }
 		}
 		```
+		
 	- 若请求失败，返回
+	
 		```
 		{
 			"type":"picture_like_response",
@@ -372,6 +380,7 @@
 			"json decode failed."
 		}
 		```
+		
 	- 错误码:
     
 	    
