@@ -161,6 +161,56 @@
         |5|tel not verified.|电话号码未通过短信验证|
         |6|database error.|数据库错误|
 
+##登录用户
+
+- c->s
+    - 请求方式：POST
+    - URL：http://101.200.89.240/index.php?r=user/login
+    - 请求格式：
+
+            {
+                "type":"login",
+                "password":"123456a",
+                "tel":"18615794931"
+            }
+            
+    - 注意事项:
+        - 无
+
+
+- s->c
+    - 成功返回： 
+
+            {
+                "type": "login"
+                "token": "46363067756d736a32644642674b6f2f6c4e337334513d3d"
+                "success": true
+                "error_no": 0
+                "error_msg": null
+            }
+    - 注意事项：
+        - `token`为以后与服务端交互所使用的，也就是说如果在`token`有效期内，只需要将其存储起来便可以和服务端交互，不需要重新登录
+
+    - 失败返回:
+
+            {
+                "type:" "login"
+                "success": false
+                "error_no": 1
+                "error_msg": "json decode failed."
+            }
+
+    - 错误码:
+    
+    
+        |error_no|error_msg|description|
+        |--------|---------|-----------|
+        |1|json decode failed.|输入不是有效的json对象|
+        |2|input not valid.|请求不完整，缺少某些属性|
+        |3|tel not found.|电话号码错误|
+        |5|password not valid.|密码不正确|
+        |6|tel not verified.|电话号码未验证|
+        |7|database error.|数据库错误|
 
 
 #主界面
