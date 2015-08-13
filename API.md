@@ -232,22 +232,34 @@
 
 		```
 		{
-			"type":"picture_search_response",
-			"success":true,
-			"error_no":0,
-			"error_msg":null,
-			"count":1,
-			"offset":0,
-			"limit":1,
-			"pictures":{
-				"55c99c2cf3bac6e813000033":{
-					"_id":{"$id":"55c99c2cf3bac6e813000033"},
-					"picture":"uploads\/18782945332\/14392760763437633d.jpeg",
-					"word":"hello!",
-					"createtime":"1439276076",
-					"created_by":{"$id":"55c99c1613c5ea8feac65302"}
-				}
-			}
+		    "type": "picture_search_response", 
+		    "success": true, 
+		    "error_no": 0, 
+		    "error_msg": null, 
+		    "count": 2, 
+		    "offset": 0, 
+		    "limit": 2, 
+		    "pictures": [
+		        {
+		            "_id": {
+		                "$id": "55c97dae2ff2e1f80d000031"
+		            }, 
+		            "picture": "uploads/18615794931/14392682706855733d.jpeg", 
+		            "word": "123", 
+		            "createtime": "1439268270"
+		        }, 
+		        {
+		            "_id": {
+		                "$id": "55c97e3d2ff2e1f80d000032"
+		            }, 
+		            "picture": "uploads/18615794931/14392684136967553d.jpeg", 
+		            "word": "123", 
+		            "createtime": "1439268413", 
+		            "created_by": {
+		                "$id": "55c95c32ab45d8580c22c224"
+		            }
+		        }, 
+		    ]
 		}
 		```
 	- 若请求失败，返回
