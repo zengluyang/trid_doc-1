@@ -1,4 +1,21 @@
 #user api
+##前言
+
+请求输入放在HTTP `POST`/`PUT`/`DELETE`/`PATCH`请求的`body`里面，并且设置header中的`Content-Type: application/json`
+
+例如，`短信验证请求`对应下面的curl命令
+
+
+
+		curl \
+		    -X POST \
+		    -H "Content-Type: application/json" \
+		    -d '{"type":"sms_validation_request","tel":"13811112222","time":"1439280893"}' \
+		    http://101.200.89.240/index.php?r=user/sms-validation-request
+
+对应下面的HTTP请求报文：
+
+
 
 ##短信验证请求
 
