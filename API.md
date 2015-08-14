@@ -7,21 +7,21 @@
 
 
 
-		curl \
-		    -X POST \
-		    -H "Content-Type: application/json" \
-		    -d '{"type":"sms_validation_request","tel":"13811112222","time":"1439280893"}' \
-		    http://101.200.89.240/index.php?r=user/sms-validation-request
+	curl \
+	    -X POST \
+	    -H "Content-Type: application/json" \
+	    -d '{"type":"sms_validation_request","tel":"13811112222","time":"1439280893"}' \
+	    http://101.200.89.240/index.php?r=user/sms-validation-request
 
 对应下面的HTTP请求报文：
 
-		POST http://101.200.89.240/index.php?r=user/sms-validation-request HTTP/1.1
-		Host: 101.200.89.240
-		User-Agent: curl/7.43.0
-		Accept: */*
-		Content-Type: application/json
-		Content-Length: 73
-		{"type":"sms_validation_request","tel":"13811112222","time":"1439280893"}
+	POST http://101.200.89.240/index.php?r=user/sms-validation-request HTTP/1.1
+	Host: 101.200.89.240
+	User-Agent: curl/7.43.0
+	Accept: */*
+	Content-Type: application/json
+	Content-Length: 73
+	{"type":"sms_validation_request","tel":"13811112222","time":"1439280893"}
 
 
 
