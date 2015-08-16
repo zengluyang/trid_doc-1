@@ -535,7 +535,7 @@
         |7|error in reading files.|无法读取偏好问题所对应的图片和描述，或者读取出错|
         |8|base64 encryption error.|base64加密图片出错|
 
-##提交偏好问题
+##上传偏好回答
 - c->s: 
     - 请求方式 POST
     - URL：http://101.200.89.240/index.php?r=preference/upload 
