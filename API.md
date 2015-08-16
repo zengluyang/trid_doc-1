@@ -541,7 +541,7 @@
     - URL：http://101.200.89.240/index.php?r=preference/upload 
         ```
         {
-            "type":"pf_answer_send",
+            "type":"pf_answer_upload",
             "tel":"18615794931",
             "token":"2775495bf4006a925e1540268e083944",
             "answer":{
