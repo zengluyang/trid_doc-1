@@ -256,6 +256,101 @@
         |6|tel not verified.|电话号码未验证|
         |7|database error.|数据库错误|
 
+##查找用户
+
+- c->s
+    - 请求方式：POST
+    - URL：http://101.200.89.240/index.php?r=user/search
+    - 请求格式：
+        - 按照昵称查找
+            ```
+            {
+                "type":"search",
+                "token":"YSs2SGhPaXZUbm1UMmV1aGJkVVRiMXVFZUIvQ2lLREg0bFdpWHhOQlJsRUpjeDlY",
+                "tel":"13811112222",
+                "search":
+                {
+                    "username":"test"
+                }
+            }
+            ```
+
+        - 按照手机号查找
+
+            ```
+            {
+                "type":"search",
+                "token":"YSs2SGhPaXZUbm1UMmV1aGJkVVRiMXVFZUIvQ2lLREg0bFdpWHhOQlJsRUpjeDlY",
+                "tel":"13811112222",
+                "search":
+                {
+                    "tel":"13811113333"
+                }
+            }
+            ```
+
+    - 注意事项:
+        - 无
+
+
+- s->c
+    - 成功返回：
+    
+            ```
+            {
+              "type": "search_result",
+              "success": true,
+              "error_no": 0,
+              "error_msg": null,
+              "count": 2,
+              "offset": 0,
+              "limit": 2,
+              "users": [
+                {
+                  "_id": {
+                    "$id": "55c95c32ab45d8580c22c224"
+                  },
+                  "tel": "18615794931",
+                  "username": "test"
+                },
+                {
+                  "_id": {
+                    "$id": "55c9af7b924029a5f6bb09e1"
+                  },
+                  "tel": "13811112222",
+                  "username": "test"
+                }
+              ]
+            }
+            ```
+    
+
+    - 注意事项：
+        - 无
+
+    - 失败返回:
+
+            {
+                "type:" "search_result"
+                "success": false
+                "error_no": 1
+                "error_msg": "json decode failed."
+            }
+
+    - 错误码:
+    
+    
+        |error_no|error_msg|description|
+        |--------|---------|-----------|
+        |1|json decode failed.|输入不是有效的json对象|
+        |2|input not valid.|请求不完整，缺少某些属性|
+        |3|tel not found.|电话号码错误|
+        |5|token not valid.|token不正确|
+        |6|tel not verified.|电话号码未验证|
+        |7|database error.|数据库错误|
+
+
+
 
 #picture api(秀爱社区)
 ##查看社区信息
