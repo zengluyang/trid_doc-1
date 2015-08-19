@@ -165,6 +165,23 @@
     - 注意事项：
         - `token`为以后与服务端交互所使用的，也就是说如果在`token`有效期内，只需要将其存储起来便可以和服务端交互，不需要重新登录
         - `huanxin_id`和`huanxin_password`为客户端与环信服务端交互所需要的唯二信息
+        - 如果错误码为7，则代表在注册环信用户的时候出错了，此时会讲环信的的reponse附带，eg
+        
+            ```
+            {
+              "type": "register",
+              "success": false,
+              "error_no": 7,
+              "error_msg": "huanxin error.",
+              "huanxin_response": {
+                "error": "duplicate_unique_property_exists",
+                "timestamp": 1439968399454,
+                "duration": 0,
+                "exception": "org.apache.usergrid.persistence.exceptions.DuplicateUniquePropertyExistsException",
+                "error_description": "Application 0c6fc7c0-4584-11e5-ad97-bf184b66b711 Entity user requires that property named username be unique, value of test5 exists"
+              }
+            }
+            ```
 
     - 失败返回:
 
@@ -186,6 +203,7 @@
         |4|token not valid.|token不正确，可能是过期或者错误了，需要通过登录流程重新获取新的token|
         |5|tel not verified.|电话号码未通过短信验证|
         |6|database error.|数据库错误|
+        |7|huanxin error.|环信操作时出错|
 
 ##登录用户
 
