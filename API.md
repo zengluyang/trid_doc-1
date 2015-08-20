@@ -383,6 +383,9 @@
 		    ]
 		}
 		```
+		- 注意事项
+	    		- picture 返回的是图片存放的相对地址，通过http请求即可获取，如
+	    		- http://101.200.89.240/uploads/18615794931/14392684136967553d.jpeg。
 	- 若请求失败，返回
 	
 		```
@@ -572,6 +575,111 @@
         |4|token not valid.|token不正确，可能是过期或者错误了，需要通过登录流程重新获取新的token|
         |5|tel not verified.|电话号码未通过短信验证|
         |6|database error.|数据库错误|
+
+
+##评论
+
+- c->s: 
+	- 请求方式 POST
+	- URL：http://101.200.89.240/index.php?r=picture/comment 
+		```
+		{
+			"type":"picture_like_request",
+			"token":"2775495bf4006a925e1540268e083944",
+			"tel":"18615794931",
+			"picture_id":"55caecb43b505f7b698b4567"
+			"comment":{
+				"response_to":2,
+				"content":"hello"
+			}
+		}
+	
+		```
+		- 注意事项
+	    		- response_to 数值对应回复的评论ID。若为0，则表示该回复为初始评论。
+- s->c： 
+	- 若请求成功，则返回
+
+		```
+		{
+			"type":"picture_comment_response",
+			"success":true,
+			"error_no":0,
+			"error_msg":null,
+			"picture":{
+				"_id":{"$id":"55d5cf48f3bac6f41400002a"},
+				"picture":"uploads\/18782946332\/14400755925375453d.jpeg",
+				"word":"hello!",
+				"like":0,
+				"like_by":[],
+				"comments":["{
+					\"response_to\":2,
+					\"content\":\"hello\",
+					\"id\":0,
+					\"user_id\":{
+						\"$id\":\"55d5cf48f3bac6f41400002a\"
+					},
+					\"create_time\":1440075740
+				}","{
+					\"response_to\":2,
+					\"content\":\"hi\",
+					\"id\":1,
+					\"user_id\":{
+						\"$id\":\"55c99c1613c5ea8feac65302\"
+					},
+					\"create_time\":1440076043
+				}","{
+					\"response_to\":1,
+					\"content\":\"hi\",
+					\"id\":3,
+					\"user_id\":{
+						\"$id\":\"55c99c1613c5ea8feac65302\"
+					},
+					\"create_time\":1440076085
+				}","{
+					\"response_to\":2,
+					\"content\":\"hello\",
+					\"id\":4,
+					\"user_id\":{
+						\"$id\":\"55c99c1613c5ea8feac65302\"
+					},
+					\"create_time\":1440078847
+				}"],
+				"createtime":1440075592,
+				"created_by":{
+					"$id":"55c99c1613c5ea8feac65302"
+				}
+			}
+		}
+		```
+		- 注意事项
+	    		- response_to 数值对应回复的评论ID。若为0，则表示该回复为初始评论。
+	    		- 每一条回复都有唯一的ID，从1开始递增。
+		
+	- 若请求失败，返回
+	
+		```
+		{
+			"type":"picture_like_response",
+			"success":false,
+			"error_no":1,
+			"error_msg":
+			"json decode failed."
+		}
+		```
+		
+	- 错误码:
+    
+        |error_no|error_msg|description|
+        |--------|---------|-----------|
+        |1|json decode failed.|输入不是有效的json对象|
+        |2|input not valid.|请求不完整，缺少某些属性|
+        |3|tel not found.|电话号码错误|
+        |4|token not valid.|token不正确，可能是过期或者错误了，需要通过登录流程重新获取新的token|
+        |5|tel not verified.|电话号码未通过短信验证|
+        |6|database error.|数据库错误|
+
+
 
 ##获取偏好问题
 - c->s: 
