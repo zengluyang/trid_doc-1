@@ -102,13 +102,14 @@
 
             ```
             {
-                type: "sms_validation_result"
-                success: true
-                token: "c0gwODVOcmVFS21OakVoQjFiV0JRaXBWYkFLVDZwd2NVaE1HTlBrSDRnWVZaWlA5"
-                huanxin_id: "13811113333"
-                huanxin_pwd: "Q0VsckJ0M0QrdHdwakpTalNxWUVoVHJS"
-                error_no: 0
-                error_msg: null
+                "type": "sms_validation_result",
+                "success": true,
+                "token": "c0gwODVOcmVFS21OakVoQjFiV0JRaXBWYkFLVDZwd2NVaE1HTlBrSDRnWVZaWlA5",
+                "huanxin_id": "13811113333",
+                "huanxin_pwd": "Q0VsckJ0M0QrdHdwakpTalNxWUVoVHJS",
+                "error_no": 0,
+                "error_msg": null,
+                "is_first_login": true
             }
             ```
 
