@@ -122,7 +122,7 @@
             {
               "type": "register",
               "success": false,
-              "error_no": 7,
+              "error_no": 4,
               "error_msg": "huanxin error.",
               "huanxin_response": {
                 "error": "duplicate_unique_property_exists",
@@ -184,6 +184,20 @@
                 "search":
                 {
                     "tel":"13811113333"
+                }
+            }
+            ```
+
+        - 按照`_id`查找
+
+            ```
+            {
+                "type":"search",
+                "token":"YSs2SGhPaXZUbm1UMmV1aGJkVVRiMXVFZUIvQ2lLREg0bFdpWHhOQlJsRUpjeDlY",
+                "tel":"13811112222",
+                "search":
+                {
+                    "_id":"55d591d12f2c8214a62fe0a7"
                 }
             }
             ```
