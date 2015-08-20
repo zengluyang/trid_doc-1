@@ -35,7 +35,7 @@
 
             {
                 "type":"sms_validation_request",
-                "tel":"13811112222",
+                "tel":"13811113333",
                 "time":"1439280893"
             }
             
@@ -88,7 +88,7 @@
 
             {
                 "type":"sms_validation_code",
-                "tel":"13811112222",
+                "tel":"13811113333",
                 "time":"1439280893",
                 "code":"123456"
             }
@@ -98,74 +98,25 @@
 
 
 - s->c
-    - 成功返回： 客户端应该存储token，以便在下一步注册中使用
+    - 成功返回： 客户端应该存储token，
 
+            ```
             {
-                "type": "sms_validation_result",
-                "success": true,
-                "token": "59437135717575643276636549645a787678307253673d3d",
-                "error_no": 0,
-                "error_msg": null
+                type: "sms_validation_result"
+                success: true
+                token: "c0gwODVOcmVFS21OakVoQjFiV0JRaXBWYkFLVDZwd2NVaE1HTlBrSDRnWVZaWlA5"
+                huanxin_id: "13811113333"
+                huanxin_pwd: "Q0VsckJ0M0QrdHdwakpTalNxWUVoVHJS"
+                error_no: 0
+                error_msg: null
             }
+            ```
 
 
-    - 失败返回:
-
-            {
-                "type:" "sms_validation_result",
-                "success": false,
-                "error_no": 1,
-                "error_msg": "json decode failed."
-            }
-
-    - 错误码:
-    
-    
-        |error_no|error_msg|description|
-        |--------|---------|-----------|
-        |1|json decode failed.|输入不是有效的json对象|
-        |2|input not valid.|请求不完整，缺少某些属性|
-        |3|validation code invalid.|验证码错误|
-
-
-
-
-
-##注册用户
-
-- c->s
-    - 请求方式：POST
-    - URL：http://101.200.89.240/index.php?r=user/register
-    - 请求格式：
-
-            {
-                "type":"register",
-                "tel":"13811112222",
-                "token":"59437135717575643276636549645a787678307253673d3d",
-                "username":"zly",
-                "password":"123456a"
-            }
-            
-    - 注意事项:
-        - `token`为短信验证成功后回复的`token`
-
-
-- s->c
-    - 成功返回： 
-
-            {
-                "type": "register"
-                "token": "66646b5937726133323071337263386b3861623638513d3d"
-                "huanxin_id": "13811112222"
-                "huanxin_password": "$2y$10$SyU0uvBEoJG8dxkqVmP8KOyG3ZtDgca.4SvK2LFvTILddmN4eRxbq"
-                "success": true
-                "error_no": 0
-                "error_msg": null
-            }
     - 注意事项：
-        - `token`为以后与服务端交互所使用的，也就是说如果在`token`有效期内，只需要将其存储起来便可以和服务端交互，不需要重新登录
+        - `token`为以后与服务端交互所使用的，也就是说如果在`token`有效期内，只需要将其存储起来便可以和服务端交互
         - `huanxin_id`和`huanxin_password`为客户端与环信服务端交互所需要的唯二信息
-        - 如果错误码为7，则代表在注册环信用户的时候出错了，此时会讲环信的的reponse附带，eg
+        - 如果错误码为4，则代表在注册环信用户的时候出错了，此时会讲环信的的reponse附带，eg
         
             ```
             {
@@ -186,9 +137,9 @@
     - 失败返回:
 
             {
-                "type:" "register"
-                "success": false
-                "error_no": 1
+                "type:" "sms_validation_result",
+                "success": false,
+                "error_no": 1,
                 "error_msg": "json decode failed."
             }
 
@@ -199,62 +150,10 @@
         |--------|---------|-----------|
         |1|json decode failed.|输入不是有效的json对象|
         |2|input not valid.|请求不完整，缺少某些属性|
-        |3|tel not found.|电话号码错误|
-        |4|token not valid.|token不正确，可能是过期或者错误了，需要通过登录流程重新获取新的token|
-        |5|tel not verified.|电话号码未通过短信验证|
-        |6|database error.|数据库错误|
-        |7|huanxin error.|环信操作时出错|
+        |3|validation code invalid.|验证码错误|
+        |4|huanxin error.|环信操作时出错|
+        |5|database error.|数据库错误|
 
-##登录用户
-
-- c->s
-    - 请求方式：POST
-    - URL：http://101.200.89.240/index.php?r=user/login
-    - 请求格式：
-
-            {
-                "type":"login",
-                "password":"123456a",
-                "tel":"18615794931"
-            }
-            
-    - 注意事项:
-        - 无
-
-
-- s->c
-    - 成功返回： 
-
-            {
-                "type": "login"
-                "token": "46363067756d736a32644642674b6f2f6c4e337334513d3d"
-                "success": true
-                "error_no": 0
-                "error_msg": null
-            }
-    - 注意事项：
-        - `token`为以后与服务端交互所使用的，也就是说如果在`token`有效期内，只需要将其存储起来便可以和服务端交互，不需要重新登录
-
-    - 失败返回:
-
-            {
-                "type:" "login"
-                "success": false
-                "error_no": 1
-                "error_msg": "json decode failed."
-            }
-
-    - 错误码:
-    
-    
-        |error_no|error_msg|description|
-        |--------|---------|-----------|
-        |1|json decode failed.|输入不是有效的json对象|
-        |2|input not valid.|请求不完整，缺少某些属性|
-        |3|tel not found.|电话号码错误|
-        |5|password not valid.|密码不正确|
-        |6|tel not verified.|电话号码未验证|
-        |7|database error.|数据库错误|
 
 ##查找用户
 
