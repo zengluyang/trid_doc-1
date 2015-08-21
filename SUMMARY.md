@@ -1,1 +1,1 @@
-*[API] API.md
+* [API](API.md)
