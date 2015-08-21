@@ -585,7 +585,7 @@
 	- URL：http://101.200.89.240/index.php?r=picture/comment 
 		```
 		{
-			"type":"picture_like_request",
+			"type":"picture_comment_request",
 			"token":"2775495bf4006a925e1540268e083944",
 			"tel":"18615794931",
 			"picture_id":"55caecb43b505f7b698b4567"
